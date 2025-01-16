@@ -63,13 +63,6 @@ dependencies {
     // Coil for images
     implementation (libs.coil.compose)
 
-    // Material Icons
-    implementation (libs.androidx.material.icons.core)
-    implementation (libs.androidx.material.icons.extended)
-
-    // Lottie (optional for animations)
-    implementation (libs.lottie.compose)
-
-    // ViewModel
-    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    //kotlinx
+    implementation(libs.kotlinx.serialization.json)
 }
