@@ -1,4 +1,5 @@
-package com.example.compose_hw3.ui.screens.detail
+package com.example.compose_hw3.ui.screens.episodes.detail
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,10 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -20,12 +22,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.example.compose_hw3.data.mockData.FakeData
+import com.example.compose_hw3.ui.screens.components.ProgressBar
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
+
 
 @Composable
-fun EpisodeDetailScreen(id: Int) {
-    val episode = FakeData.dataEpisode.find { it.id == id }
-    if (episode != null) {
+fun EpisodesDetailScreen(id: Int) {
+    // TODO:
+    val episodesDetailViewModel = koinViewModel<EpisodesDetailViewModel>(parameters = { parametersOf (id)})
+    val episode by episodesDetailViewModel.episodeState.collectAsState()
+
+    if (episode != null){
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -34,7 +42,7 @@ fun EpisodeDetailScreen(id: Int) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(
-                model = episode.img,
+                model = episode!!.url,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -45,7 +53,7 @@ fun EpisodeDetailScreen(id: Int) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = episode.name,
+                text = episode!!.name,
                 textAlign = TextAlign.Center,
                 fontSize = 32.sp,
                 fontStyle = FontStyle.Normal,
@@ -54,35 +62,15 @@ fun EpisodeDetailScreen(id: Int) {
             )
 
             Text(
-                text = "Air Date: " + episode.name,
-                fontSize = 20.sp,
-                fontStyle = FontStyle.Italic,
-                color = Color.Gray,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-
-            Text(
-                text = "Episode: " + episode.name,
-                fontSize = 18.sp,
-                fontStyle = FontStyle.Normal,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            Text(
-                text = "ID: " + episode.id.toString(),
+                text = "ID: "+episode!!.id.toString(),
                 textAlign = TextAlign.Center,
                 fontSize = 16.sp,
                 fontStyle = FontStyle.Normal,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         }
-    } else {
-        Text(
-            text = "404 error episode not found",
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontStyle = FontStyle.Normal,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
+    }else{
+        ProgressBar()
     }
 }
+

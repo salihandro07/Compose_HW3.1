@@ -41,6 +41,20 @@ android {
 
 dependencies {
 
+    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
+
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.converter.gson)
+    implementation(libs.koin.android)
+    implementation (libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,13 +70,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    // Navigation Compose
-    implementation (libs.androidx.navigation.compose)
-
-    // Coil for images
-    implementation (libs.coil.compose)
-
-    //kotlinx
-    implementation(libs.kotlinx.serialization.json)
 }

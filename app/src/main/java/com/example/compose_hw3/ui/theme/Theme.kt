@@ -1,4 +1,4 @@
-package com.example.composenavigation.ui.theme
+package com.example.compose_hw3.ui.theme
 
 import android.app.Activity
 import android.os.Build

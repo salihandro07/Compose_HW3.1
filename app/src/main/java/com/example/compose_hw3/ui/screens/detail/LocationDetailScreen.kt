@@ -19,8 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import com.example.composenavigation.data.mockData.FakeData
+import coil3.compose.AsyncImage
+import com.example.compose_hw3.data.mockData.FakeData
 
 @Composable
 fun LocationDetailScreen(id: Int) {
